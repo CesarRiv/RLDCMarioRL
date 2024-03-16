@@ -21,4 +21,4 @@ Ensure you're in the project's root directory when you run the pip install comma
 
 Note: For CUDA-compatible packages (torch, torchaudio, torchvision), you may need to install them separately to match your system's CUDA setup. Refer to the official PyTorch installation guide for detailed instructions.
 
-Feel free to adjust the content to better fit your project's specifics or to add any additional instructions that might be helpful for users setting up the project.
+Feel free to adjust the content to better fit your project's specifics
