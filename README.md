@@ -15,10 +15,5 @@ This project requires certain Python packages to be installed to function correc
 ## Installing Dependencies
 To set up your environment to run the project, we recommend creating a virtual environment and installing the dependencies as follows:
 
+```sh
 pip install -r requirements.txt
-
-Ensure you're in the project's root directory when you run the pip install command, or provide the full path to the requirements.txt file.
-
-Note: For CUDA-compatible packages (torch, torchaudio, torchvision), you may need to install them separately to match your system's CUDA setup. Refer to the official PyTorch installation guide for detailed instructions.
-
-Feel free to adjust the content to better fit your project's specifics
