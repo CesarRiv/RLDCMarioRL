@@ -49,9 +49,7 @@ class Player:
     def choose_action(self, observation):
         if np.random.random() < self.epsilon:
             return np.random.randint(self.num_actions)
-        observation = torch.tensor(np.array(observation), dtype=torch.float32) \
-                        .unsqueeze(0) \
-                        .to(self.online_network.device)
+        observation = torch.tensor(np.array(observation), dtype=torch.float32).unsqueeze(0).to(self.online_network.device)
         return self.online_network(observation).argmax().item()
 
     def decay_epsilon(self):
@@ -68,8 +66,17 @@ class Player:
         torch.save(self.online_network.state_dict(), path)
 
     def load_model(self, path):
-        self.online_network.load_state_dict(torch.load(path))
-        self.target_network.load_state_dict(torch.load(path))
+        state_dict = torch.load(path)
+        state_dict = self.remap_state_dict_keys(state_dict, 'network.', 'fc_layers.')
+        self.online_network.load_state_dict(state_dict)
+        self.target_network.load_state_dict(state_dict)
+
+    def remap_state_dict_keys(self, state_dict, old_prefix, new_prefix):
+        new_state_dict = {}
+        for key, value in state_dict.items():
+            new_key = key.replace(old_prefix, new_prefix)
+            new_state_dict[new_key] = value
+        return new_state_dict
 
     def learn(self):
         if len(self.replay_buffer) < self.batch_size:
